@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.sumit.model.TestBean;
 import com.sumit.service.MultipurposeService;
+import com.sumit.service.ThirdPartyModel;
 
 @Component
 public class CommandLineRunnerImpl implements CommandLineRunner {
@@ -29,6 +30,15 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
 		
 		TestBean testBeanStateContext = multipurposeService.getTestBeanStateFromContext();
 		System.out.println(testBeanStateContext);
+		
+		/* The real power of ApplicationContext explained here where we need to create a new bean manually(non Spring Bean)
+		 * and that new Bean contains a Spring managed Bean
+		 * e.g. ThirdPartyModel is not a component or not a Spring Bean, but ThirdPartyModel contains
+		 * MyApplicationService which is a Spring Bean
+		 */
+		ThirdPartyModel thirdPartyModel = new ThirdPartyModel();
+		thirdPartyModel.setThirdPartyModel();
+		System.out.println(thirdPartyModel);
 		
     }
 }
